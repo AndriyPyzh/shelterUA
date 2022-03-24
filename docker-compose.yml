@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    networks:
+      - net
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+    environment:
+      POSTGRES_USER: "${DATASOURCE_USER}"
+      POSTGRES_PASSWORD: "${DATASOURCE_PASSWORD}"
+    volumes:
+      - /var/lib/postgresql/data
+
+  shelter-ua:
+    container_name: shelter-ua
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - net
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      spring.datasource.url: "${DATASOURCE_URL}"
+      spring.datasource.username: "${DATASOURCE_USER}"
+      spring.datasource.passowrd: "${DATASOURCE_PASSWORD}"
+
+networks:
+  net:
