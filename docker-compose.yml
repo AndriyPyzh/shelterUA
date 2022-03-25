@@ -31,6 +31,7 @@ services:
       spring.datasource.url: "${DATASOURCE_URL}"
       spring.datasource.username: "${DATASOURCE_USER}"
       spring.datasource.passowrd: "${DATASOURCE_PASSWORD}"
+      shelter-ua.secret-key: "${SECRET_KEY}"
 
 networks:
   net:
