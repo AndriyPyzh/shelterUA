@@ -3,6 +3,7 @@ package com.shelter.ua.controller;
 import com.shelter.ua.dto.response.ExceptionResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.MESSAGE;
 import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.STACK_TRACE;
 
+@Slf4j
 @RestControllerAdvice
 @AllArgsConstructor
 @Getter
@@ -36,6 +38,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public final ResponseEntity<Object> handleRuntimeException(
             RuntimeException exception, WebRequest request) {
+        log.error(exception.getMessage(), exception);
         ExceptionResponse response = new ExceptionResponse(getErrorAttributes(request));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }

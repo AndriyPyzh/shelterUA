@@ -51,12 +51,21 @@ public class UserService implements UserDetailsService {
     }
 
     public void updatePassword(PasswordDto passwordDto, String username) {
-        User user = repository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("User with such username not exists: " + username));
+        User user = findByUsername(username);
 
         user.setPassword(passwordEncoder.encode(passwordDto.getPassword()));
 
         repository.save(user);
+    }
+
+
+    public User findByUsername(String username) {
+        return repository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User with such username not exists: " + username));
+    }
+
+    public boolean existsByUsername(String username) {
+        return repository.existsByUsername(username);
     }
 
 }

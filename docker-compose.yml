@@ -13,7 +13,7 @@ services:
       POSTGRES_USER: "${DATASOURCE_USER}"
       POSTGRES_PASSWORD: "${DATASOURCE_PASSWORD}"
     volumes:
-      - /var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql/data
 
   shelter-ua:
     container_name: shelter-ua

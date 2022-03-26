@@ -47,7 +47,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         try {
             Map<String, Object> claims = getClaimsFromToken(token);
 
-            String username = (String) claims.get("username");
+            String username = (String) claims.get("user_name");
             List<String> authorities = (List<String>) claims.get("authorities");
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(
