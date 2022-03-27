@@ -43,23 +43,4 @@ public class CustomExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public final ResponseEntity<Object> handleMethodArgumentNotValidException(
-            MethodArgumentNotValidException exception, WebRequest request) {
-        Map<String, Object> errorAttributes = getErrorAttributes(request);
-
-        ExceptionResponse response = new ExceptionResponse(errorAttributes);
-
-        response.setMessage("Validation failed");
-
-        List<String> errorMessages = ((List<FieldError>) errorAttributes.get("errors"))
-                .stream()
-                .map(e -> String.format("%s - %s", e.getField(), e.getDefaultMessage()))
-                .collect(Collectors.toList());
-
-        response.setErrors(errorMessages);
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-    }
-
 }

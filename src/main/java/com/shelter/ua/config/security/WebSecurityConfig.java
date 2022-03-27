@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/actuator/health").permitAll()
                 .antMatchers("/oauth/token").permitAll()
-                .antMatchers(HttpMethod.GET, "/adverts/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/adverts").permitAll()
                 .antMatchers(HttpMethod.POST, "/users").permitAll()
                 .anyRequest()
                 .authenticated();

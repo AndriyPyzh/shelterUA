@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -24,6 +25,11 @@ public class AdvertController {
     public Page<Advert> getByPage(Pageable pageable,
                                   @RequestParam Map<String, String> params) {
         return advertService.getByPage(pageable, SearchCriteria.of(params));
+    }
+
+    @GetMapping("author")
+    public List<Advert> getAuthorsAdverts(Principal principal) {
+        return advertService.getByUsername(principal.getName());
     }
 
     @ResponseStatus(HttpStatus.CREATED)

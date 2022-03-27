@@ -28,12 +28,10 @@ public class Advert {
 
     @NotBlank
     @Length(min = 3, max = 20)
-    @Pattern(regexp = "[a-zA-Z]+")
     @Column(nullable = false)
     private String country;
 
     @Length(min = 3, max = 50)
-    @Pattern(regexp = "[a-zA-Z]+")
     private String region;
 
     @NotBlank
@@ -43,7 +41,6 @@ public class Advert {
 
     @NotBlank
     @Length(min = 3, max = 20)
-    @Pattern(regexp = "[a-zA-Z]+")
     @Column(nullable = false)
     private String city;
 

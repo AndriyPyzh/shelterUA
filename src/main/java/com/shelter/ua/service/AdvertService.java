@@ -48,4 +48,7 @@ public class AdvertService {
         return advertRepository.findAll(AdvertSpecification.of(searchCriteria), pageable);
     }
 
+    public List<Advert> getByUsername(String name) {
+       return advertRepository.findByOwnerUsername(name);
+    }
 }
